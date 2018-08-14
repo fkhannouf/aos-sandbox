@@ -8,7 +8,7 @@
  
 
 INCDIR = ./include
-CC=g++
+CC=ppc-amigaos-g++
 CFLAGS=-I$(INCDIR)
 
 OBJDIR = obj
