@@ -18,6 +18,8 @@
 
 #include <UICheckBox.h>
 #include <UIButton.h>
+#include <UIGroup.h>
+
 
 #define MENU_ID_Quit       FULLMENUNUM(0,0,NOSUB)
 
@@ -57,17 +59,25 @@ struct HintInfo gb_HintInfo[] =
 
 int main()
 {
-	UICheckBox *checkBox = new UICheckBox((UICheckBoxProps){
+	UICheckBox* checkBox = new UICheckBox((UICheckBoxProps){
 		ID : GAD_ID_Help,
 		RelVerify : TRUE,
 		Text : "Bubble_Help Active"
 	});
 
-	UIButton *button = new UIButton((UIButtonProps){
+	UIButton* button = new UIButton((UIButtonProps){
 		ID : GAD_ID_Quit,
 		RelVerify : TRUE,
 		Text : "_Quit"
 	});
+
+	UIGroup* verticalGroup = new UIGroup((UIGroupProps){
+		Orientation : LAYOUT_ORIENT_VERT,
+		SpaceOuter : TRUE,
+		SpaceInner : TRUE
+	});
+
+	verticalGroup.addMember(button);
 
 	//CheckBox *checkBox = new CheckBox();
 

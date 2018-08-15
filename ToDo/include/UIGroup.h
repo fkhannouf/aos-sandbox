@@ -2,32 +2,32 @@
 
 extern "C"  {
 	typedef struct UIGroupProps {
-		uint32 ID;
-		bool RelVerify;
-		const char * Text;
-	} UIButtonProps;
+		//uint32 ID;
+		uint Orientation;
+		bool SpaceOuter;
+		bool SpaceInner;
+	} UIGroupProps;
 }
 
-class UIButton {
+class UIGroup {
 private:
-	UIButtonProps _props;
+	UIGroupProps _props;
 	struct Gadget *_gadget;
-	uint32 _ID;
-	bool _RelVerify;
-	std::string _Text;
+	//uint32 _ID;
+	uint _Orientation;
+	bool _SpaceOuter;
+	bool _SpaceInner;
 
 public:
-	UIButton():
+	UIGroup():
 		_gadget(NULL),
-		_ID(0),
-		_RelVerify(FALSE),
-		_Text("Default Label") { }
+		//_ID(0),
+		_Orientation(LAYOUT_ORIENT_VERT),
+		_SpaceOuter(FALSE),
+		_SpaceInner(FALSE) { }
 
-	UIButton(UIButtonProps props) {
+	UIGroup(UIGroupProps props) {
 		_props = props;
-		if (props.Text) {
-			_Text = std::string(props.Text);
-		}
 	}
 
 	struct Gadget *gadget() {
@@ -45,7 +45,16 @@ public:
 		return _gadget;
 	}
 
-	~UIButton() {
+	void addMember(APTR gadgetToAdd) {
+		struct Gadget* groupGadget = gadget();
+		struct opMember opAddMember_s = {
+			MethodID : OM_ADDMEMBER,
+			opam_Object : (Object*)gadgetToAdd
+		};
+		//IIntuition->IDoMethod(groupGadget, OM_ADDMEMBER, &opAddMember_s);
+
+	}
+	~UIGroup() {
 
 	}
 };
